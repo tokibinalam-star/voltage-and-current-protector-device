@@ -1,0 +1,116 @@
+{
+  "version": 1,
+  "author": "Mohammad Toki Bin Alam",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-esp32-devkit-c-v4",
+      "id": "esp",
+      "top": -30.46,
+      "left": 109.3,
+      "rotate": 90,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-slide-potentiometer",
+      "id": "pot1",
+      "top": 129.8,
+      "left": -221.8,
+      "attrs": { "travelLength": "30" }
+    },
+    {
+      "type": "wokwi-slide-potentiometer",
+      "id": "pot2",
+      "top": -52.6,
+      "left": -221.8,
+      "attrs": { "travelLength": "30" }
+    },
+    {
+      "type": "wokwi-lcd1602",
+      "id": "lcd1",
+      "top": 246.4,
+      "left": 255.2,
+      "attrs": { "pins": "i2c" }
+    },
+    { "type": "wokwi-relay-module", "id": "relay1", "top": -38.2, "left": 316.8, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "led1",
+      "top": -30,
+      "left": 573,
+      "rotate": 90,
+      "attrs": { "color": "orange" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led2",
+      "top": 114,
+      "left": 419.4,
+      "rotate": 90,
+      "attrs": { "color": "green" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "led3",
+      "top": 152.4,
+      "left": 419.4,
+      "rotate": 90,
+      "attrs": { "color": "red" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 128.75,
+      "left": 336,
+      "attrs": { "value": "1000" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": -15.25,
+      "left": 508.8,
+      "attrs": { "value": "1000" }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "text1",
+      "top": 38.4,
+      "left": -163.2,
+      "attrs": { "text": "Current Controller" }
+    },
+    {
+      "type": "wokwi-text",
+      "id": "text2",
+      "top": 220.8,
+      "left": -182.4,
+      "attrs": { "text": "Voltage Controller" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX", "$serialMonitor:TX", "", [] ],
+    [ "esp:5V", "lcd1:VCC", "green", [ "v0" ] ],
+    [ "esp:5V", "relay1:VCC", "green", [ "v0" ] ],
+    [ "esp:3V3", "pot2:VCC", "green", [ "v67.35", "h-508.8", "v-105.6" ] ],
+    [ "pot2:VCC", "pot1:VCC", "green", [ "h-86.4", "v182.4" ] ],
+    [ "pot1:SIG", "esp:34", "green", [ "h0", "v-48.8", "h422.4" ] ],
+    [ "pot2:SIG", "esp:35", "green", [ "h0", "v47.2", "h393.6" ] ],
+    [ "esp:GND.1", "relay1:GND", "black", [ "v0" ] ],
+    [ "pot2:GND", "esp:GND.1", "black", [ "v0" ] ],
+    [ "pot1:GND", "esp:GND.1", "black", [ "v0" ] ],
+    [ "led2:C", "r1:2", "black", [ "h0" ] ],
+    [ "led3:C", "r1:2", "black", [ "h0" ] ],
+    [ "r1:1", "esp:GND.2", "black", [ "v-9.6", "h-96" ] ],
+    [ "r2:2", "led1:C", "black", [ "v0" ] ],
+    [ "r2:1", "relay1:GND", "black", [ "v-67.2", "h-249.6", "v67.6" ] ],
+    [ "esp:18", "led2:A", "green", [ "v0" ] ],
+    [ "esp:19", "led3:A", "green", [ "v0" ] ],
+    [ "lcd1:SDA", "esp:21", "green", [ "h0" ] ],
+    [ "lcd1:SCL", "esp:22", "green", [ "h0" ] ],
+    [ "relay1:IN", "esp:4", "green", [ "h0" ] ],
+    [ "lcd1:GND", "esp:GND.2", "black", [ "h0" ] ],
+    [ "relay1:NO", "led1:A", "green", [ "h0" ] ],
+    [ "relay1:COM", "relay1:VCC", "green", [ "h30", "v-49.4", "h-172.8" ] ]
+  ],
+  "dependencies": {}
+}
